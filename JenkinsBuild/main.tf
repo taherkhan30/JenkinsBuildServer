@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "myResGroup" {
 }
 
 resource "azurerm_public_ip" "jenkinsServerPublicIP" {
-  name                = "jenkinsServerIP"
+  name                = "jenkinsServerIP123"
   location            = azurerm_resource_group.myResGroup.location
   resource_group_name = azurerm_resource_group.myResGroup.name
   allocation_method   = "Static"
@@ -65,11 +65,7 @@ resource "azurerm_virtual_machine" "jenkinsServerVM" {
   }
 
   os_profile_linux_config {
-    disable_password_authentication = true
-    ssh_keys {
-      path = "/home/azureuser/.ssh/authorized_keys"
-      key_data = file("~/.ssh/azure.pub")
-    }
+    disable_password_authentication = false
   }
   tags = {
     environment = "staging"
